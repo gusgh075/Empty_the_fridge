@@ -1,4 +1,4 @@
-package com.ohgiraffers.hw22thteamproject.common;
+package com.ohgiraffers.hw22thteamproject.common.dto;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
