@@ -13,3 +13,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mappers/**/*.xml
+  type-aliases-package: com.ohgiraffers.hw22thteamproject.user.query.dto,
+                        com.ohgiraffers.hw22thteamproject.recipe.query.dto,
+                        com.ohgiraffers.hw22thteamproject.notification.query.dto,
+                        com.ohgiraffers.hw22thteamproject.ingredientstock.query.dto,

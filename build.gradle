@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.1'
+    id 'org.springframework.boot' version '3.5.9'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -26,17 +26,30 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:4.0.1'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.modelmapper:modelmapper:3.2.5'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    implementation 'commons-io:commons-io:2.18.0'
+
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    compileOnly 'org.projectlombok:lombok'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:4.0.1'
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
