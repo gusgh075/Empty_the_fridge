@@ -1,0 +1,53 @@
+server:
+  port: 8000  # Gateway 서버는 8000번 포트에서 요청 대기
+
+spring:
+  application:
+    name: gateway-server  # Eureka에 등록될 Gateway 이름
+  cloud:
+    gateway:
+      # Netty 기반의 비동기 웹 서버(WebFlux) 설정을 따름
+      server:
+        webflux:
+          routes:
+            # --- [첫 번째 서비스 라우팅 규칙] ---
+            - id: user-service
+              # lb:// 의미: Load Balancer. Eureka에 등록된 '1ST-SERVICE'라는 이름을 찾아가며,
+              # 여러 인스턴스가 있을 경우 로드밸런싱(부하분산)을 수행
+              uri: lb://SWCAMP-USER-SERVICE
+              predicates:
+                # 조건: 사용자가 'http://gateway:8000/api/v1/user-service/**'로 요청을 보내면 이 규칙이 발동함
+                - Path=/api/v1/user-service/**
+              filters:
+                # 1. 경로 재작성:
+                #    들어온 요청 '/api/v1/user-service/health' -> 나가는 요청 '/health'
+                #    (?<segment>.*)는 나머지 경로를 변수로 캡처하여 $\{segment}에 넣음
+                - RewritePath=/api/v1/user-service/(?<segment>.*), /$\{segment}
+                - name: CircuitBreaker # 회로차단기(두꺼비집) == MS의 문제가 있거나 응답이 지연될 경우 동작
+                  args:
+                    name: userServiceCB
+                    fallbackUri: forward:/fallback/user
+                    # fallback : 대안
+            - id: order-service
+              # lb:// 의미: Load Balancer.  Eureka에 등록된 '1ST-SERVICE'라는 이름을 찾아가며,
+              # 여러 인스턴스가 있을 경우 로드밸런싱(부하분산)을 수행
+              uri: lb://SWCAMP-ORDER-SERVICE
+              predicates:
+                # 조건: 사용자가 'http://gateway:8000/api/v1/user-service/**'로 요청을 보내면 이 규칙이 발동함
+                - Path=/api/v1/order-service/**
+              filters:
+                # 1. 경로 재작성:
+                #    들어온 요청 '/api/v1/user-service/health' -> 나가는 요청 '/health'
+                #    (?<segment>.*)는 나머지 경로를 변수로 캡처하여 $\{segment}에 넣음
+                - RewritePath=/api/v1/order-service/(?<segment>.*), /$\{segment}
+# Eureka Server(전화번호부) 설정
+eureka:
+  client:
+    register-with-eureka: true  # Gateway도 Eureka에 자신을 등록
+    fetch-registry: true        # 다른 서비스들의 주소 목록을 받아옴 (라우팅을 위해 필수).
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+# JWT 토큰 검증을 위한 비밀키 설정
+jwt:
+  secret: LH9QZL8upsPBfuDY+Dkb1kT9DZIIUSuA2u4O6Lfi3mkEfeWtETpVTcR/8SMZdJWn/xNTuCQBE6rBvDXgnVmscQ==
