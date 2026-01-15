@@ -25,9 +25,8 @@ public class Notification {
     @Column(name = "user_no", nullable = false)
     private Long userNo;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "notification_type_no", nullable = false)
-    private NotificationType notificationType;
+    @Column(name = "notification_type_no", nullable = false)
+    private long notificationTypeNo;
 
     @Column(name = "notification_content", nullable = false)
     private String notificationContent;
@@ -43,10 +42,10 @@ public class Notification {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public static Notification createNotification(Long userNo, NotificationType notificationType, String notificationContent) {
+    public static Notification createNotification(Long userNo, long notificationTypeNo, String notificationContent) {
         Notification notification = new Notification();
         notification.userNo = userNo;
-        notification.notificationType = notificationType;
+        notification.notificationTypeNo = notificationTypeNo;
         notification.notificationContent = notificationContent;
         notification.isChecked = false;
         return notification;

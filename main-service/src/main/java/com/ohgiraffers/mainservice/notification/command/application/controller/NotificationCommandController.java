@@ -1,15 +1,16 @@
 package com.ohgiraffers.mainservice.notification.command.application.controller;
 
 import com.ohgiraffers.mainservice.common.dto.ApiResponse;
+import com.ohgiraffers.mainservice.notification.command.application.dto.request.NotificationCreateRequest;
 import com.ohgiraffers.mainservice.notification.command.application.service.NotificationCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
 public class NotificationCommandController {
 
     private final NotificationCommandService notificationCommandService;
@@ -20,7 +21,15 @@ public class NotificationCommandController {
             @PathVariable("notification-no") Long notificationNo
             ) {
         this.notificationCommandService.checkNotification(notificationNo);
-        return null;
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 
+    /* 알림 일괄 생성 (Feign Client 호출용) */
+    @PostMapping("/notifications")
+    public ResponseEntity<ApiResponse<Void>> createNotifications(
+            @RequestBody List<NotificationCreateRequest> requests
+    ) {
+        this.notificationCommandService.createNotifications(requests);
+        return ResponseEntity.ok(ApiResponse.success(null));
+    }
 }
