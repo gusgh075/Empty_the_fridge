@@ -126,7 +126,7 @@ public class IngredientStockCommandService {
         for (IngredientStock stock : filteredStockListA) {
             long daysRemaining = ChronoUnit.DAYS.between(now, stock.getIngredientStockExpiredAt());
             String content = stock.getIngredientStockName() + " 유통기한이 " + daysRemaining + "일 남음";
-            Notification notification = Notification.createNotification(userNo, expiryNotificationType, content);
+            Notification notification = Notification.createNotification(userNo, expiryNotificationType.getNotificationTypeNo(), content);
             notifications.add(notification);
         }
 
@@ -135,7 +135,7 @@ public class IngredientStockCommandService {
             String content = stock.getIngredientStockName() + " 재고가 "
                     + stock.getIngredientStockNowQuantity()
                     + stock.getIngredientStockUnit() + " 남음";
-            Notification notification = Notification.createNotification(userNo, lowStockNotificationType, content);
+            Notification notification = Notification.createNotification(userNo, lowStockNotificationType.getNotificationTypeNo(), content);
             notifications.add(notification);
         }
 

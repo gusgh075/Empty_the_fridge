@@ -10,36 +10,32 @@ spring:
       server:
         webflux:
           routes:
-            # --- [첫 번째 서비스 라우팅 규칙] ---
+             # --- [main-service 라우팅 규칙] ---
+            - id: main-service
+              uri: lb://MAIN-SERVICE
+              predicates:
+                - Path=/api/v1/main-service/**
+              filters:
+                - RewritePath=/api/v1/main-service/(?<segment>.*), /$\{segment}
+            # --- [user-service 라우팅 규칙] ---
             - id: user-service
-              # lb:// 의미: Load Balancer. Eureka에 등록된 '1ST-SERVICE'라는 이름을 찾아가며,
-              # 여러 인스턴스가 있을 경우 로드밸런싱(부하분산)을 수행
               uri: lb://USER-SERVICE
               predicates:
-                # 조건: 사용자가 'http://gateway:8000/api/v1/user-service/**'로 요청을 보내면 이 규칙이 발동함
                 - Path=/api/v1/user-service/**
               filters:
-                # 1. 경로 재작성:
-                #    들어온 요청 '/api/v1/user-service/health' -> 나가는 요청 '/health'
-                #    (?<segment>.*)는 나머지 경로를 변수로 캡처하여 $\{segment}에 넣음
                 - RewritePath=/api/v1/user-service/(?<segment>.*), /$\{segment}
                 - name: CircuitBreaker # 회로차단기(두꺼비집) == MS의 문제가 있거나 응답이 지연될 경우 동작
                   args:
                     name: userServiceCB
                     fallbackUri: forward:/fallback/user
-                    # fallback : 대안
-            - id: order-service
-              # lb:// 의미: Load Balancer.  Eureka에 등록된 '1ST-SERVICE'라는 이름을 찾아가며,
-              # 여러 인스턴스가 있을 경우 로드밸런싱(부하분산)을 수행
-              uri: lb://MAIN-SERVICE
+            # --- [ingredient-stock-service 라우팅 규칙] ---
+            - id: ingredient-stock-service
+              uri: lb://INGREDIENT-STOCK-SERVICE
               predicates:
-                # 조건: 사용자가 'http://gateway:8000/api/v1/user-service/**'로 요청을 보내면 이 규칙이 발동함
-                - Path=/api/v1/main-service/**
+                - Path=/api/v1/ingredient-stock-service/**
               filters:
-                # 1. 경로 재작성:
-                #    들어온 요청 '/api/v1/user-service/health' -> 나가는 요청 '/health'
-                #    (?<segment>.*)는 나머지 경로를 변수로 캡처하여 $\{segment}에 넣음
-                - RewritePath=/api/v1/main-service/(?<segment>.*), /$\{segment}
+                - RewritePath=/api/v1/ingredient-stock-service/(?<segment>.*), /$\{segment}
+
 # Eureka Server(전화번호부) 설정
 eureka:
   client:

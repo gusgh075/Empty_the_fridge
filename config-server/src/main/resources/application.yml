@@ -9,4 +9,6 @@ spring:
     config:
       server:
         git:
-          default-label: main # mainbranch를 읽겠다
+          uri: https://github.com/gusgh075/config-server-test.git
+          username:
+          password:

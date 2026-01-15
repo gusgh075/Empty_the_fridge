@@ -1,22 +1,53 @@
 package com.ohgiraffers.mainservice.notification.command.application.service;
 
+import com.ohgiraffers.mainservice.exception.BusinessException;
+import com.ohgiraffers.mainservice.exception.ErrorCode;
+import com.ohgiraffers.mainservice.notification.command.application.dto.request.NotificationCreateRequest;
 import com.ohgiraffers.mainservice.notification.command.domain.aggregate.Notification;
+import com.ohgiraffers.mainservice.notification.command.domain.aggregate.NotificationType;
 import com.ohgiraffers.mainservice.notification.command.domain.repository.NotificationDomainRepository;
+import com.ohgiraffers.mainservice.notification.command.domain.repository.NotificationTypeDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class NotificationCommandService {
 
     private final NotificationDomainRepository notificationDomainRepository;
+    private final NotificationTypeDomainRepository notificationTypeDomainRepository;
 
     @Transactional
     public void checkNotification(Long notificationNo) {
         Notification notice = this.notificationDomainRepository.getNotificationByNotificationNo(notificationNo);
         notice.setCheckTrue();
+    }
+
+    @Transactional
+    public void createNotifications(List<NotificationCreateRequest> requests) {
+        if (requests == null || requests.isEmpty()) {
+            return;
+        }
+
+        List<Notification> notifications = new ArrayList<>();
+
+        for (NotificationCreateRequest request : requests) {
+            NotificationType notificationType = this.notificationTypeDomainRepository
+                    .findByNotificationTypeNo(request.getNotificationTypeNo())
+                    .orElseThrow(() -> new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR));
+
+            Notification notification = Notification.createNotification(
+                    request.getUserNo(),
+                    notificationType.getNotificationTypeNo(),
+                    request.getNotificationContent()
+            );
+            notifications.add(notification);
+        }
+
+        this.notificationDomainRepository.saveAll(notifications);
     }
 }
