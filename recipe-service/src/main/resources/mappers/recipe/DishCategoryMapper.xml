@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.mainservice.recipe.query.mapper.DishCategoryMapper">
+    <resultMap id="DishCategoryResultMap" type="com.ohgiraffers.mainservice.recipe.query.dto.response.DishCategoryDTO">
+        <id property="dishCategoryNo" column="dish_category_no"/>
+        <result property="dishCategoryName" column="dish_category_name"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectDishCategoryById" parameterType="int" resultMap="DishCategoryResultMap">
+        SELECT dish_category_no,
+        dish_category_name,
+        created_at,
+        updated_at
+        FROM dish_category
+        WHERE dish_category_no = #{dishCategoryNo}
+    </select>
+
+    <select id="selectAllDishCategories" resultMap="DishCategoryResultMap">
+        SELECT * FROM dish_category
+    </select>
+</mapper>

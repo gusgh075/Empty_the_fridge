@@ -1,0 +1,9 @@
+# Server booting시 제일 먼저 인식하고 적용하는 file: bootstrap
+# implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+
+# config server가 관리하는 msa-config.yml file을 읽어온다
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: msa-config

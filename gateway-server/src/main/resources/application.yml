@@ -40,6 +40,13 @@ spring:
                 #    들어온 요청 '/api/v1/user-service/health' -> 나가는 요청 '/health'
                 #    (?<segment>.*)는 나머지 경로를 변수로 캡처하여 $\{segment}에 넣음
                 - RewritePath=/api/v1/main-service/(?<segment>.*), /$\{segment}
+
+            - id: -recipe-service
+              uri: lb://RECIPE-SERVICE
+              predicates:
+                - Path=/api/v1/recipe-service/**
+              filters:
+                - RewritePath=/api/v1/recipe-service/(?<segment>.*), /$\{segment}
 # Eureka Server(전화번호부) 설정
 eureka:
   client:
