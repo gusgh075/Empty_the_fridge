@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.mainservice.recipe.query.mapper.RecommendRecipeMapper">
+    <resultMap id="RecommendRecipeResultMap" type="com.ohgiraffers.mainservice.recipe.query.dto.response.RecommendRecipeDTO">
+        <id property="id" column="rcd_recipe_no"/>
+        <result property="userNo" column="user_no"/>
+        <result property="dishCategoryNo" column="dish_category_no"/>
+        <result property="rcdRecipeDishName" column="rcd_recipe_dish_name"/>
+        <result property="rcdRecipeIngredients" column="rcd_recipe_ingredients"/>
+        <result property="rcdRecipeSubstitutions" column="rcd_recipe_substitutions"/>
+        <result property="rcdRecipeCookery" column="rcd_recipe_cookery"/>
+        <result property="rcdRecipeTips" column="rcd_recipe_tips"/>
+    </resultMap>
+
+    <select id="selectRecommendRecipesByUser" parameterType="int" resultMap="RecommendRecipeResultMap">
+        SELECT
+            rcd_recipe_no,
+            user_no,
+            dish_category_no,
+            rcd_recipe_dish_name,
+            rcd_recipe_ingredients,
+            rcd_recipe_substitutions,
+            rcd_recipe_cookery,
+            rcd_recipe_tips
+        FROM rcd_recipe
+        WHERE user_no = #{userNo}
+    </select>
+
+    <select id="selectRecommendRecipeById" parameterType="int" resultMap="RecommendRecipeResultMap">
+        SELECT
+            rcd_recipe_no,
+            user_no,
+            dish_category_no,
+            rcd_recipe_dish_name,
+            rcd_recipe_ingredients,
+            rcd_recipe_substitutions,
+            rcd_recipe_cookery,
+            rcd_recipe_tips
+        FROM rcd_recipe
+        WHERE rcd_recipe_no = #{id}
+    </select>
+</mapper>

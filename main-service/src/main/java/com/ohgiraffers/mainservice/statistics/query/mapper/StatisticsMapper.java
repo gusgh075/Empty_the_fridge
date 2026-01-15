@@ -7,7 +7,6 @@ import com.ohgiraffers.mainservice.statistics.query.dto.request.DisposalCostRequ
 import com.ohgiraffers.mainservice.statistics.query.dto.request.MonthlyPurchaseRequest;
 import com.ohgiraffers.mainservice.statistics.query.dto.response.*;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface StatisticsMapper {
