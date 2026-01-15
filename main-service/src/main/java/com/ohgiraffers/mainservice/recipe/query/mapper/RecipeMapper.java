@@ -1,6 +1,7 @@
 package com.ohgiraffers.mainservice.recipe.query.mapper;
 
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.RecipeDTO;
+
+import com.ohgiraffers.mainservice.recipe.query.dto.response.RecipeDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;

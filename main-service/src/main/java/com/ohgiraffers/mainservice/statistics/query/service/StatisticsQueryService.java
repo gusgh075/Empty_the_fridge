@@ -1,10 +1,10 @@
 package com.ohgiraffers.mainservice.statistics.query.service;
 
-import com.ohgiraffers.hw22thteamproject.jwt.JwtTokenProvider;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.request.DisposalCostRequest;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.request.MonthlyPurchaseRequest;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.response.*;
-
+import com.ohgiraffers.mainservice.jwt.JwtTokenProvider;
+import com.ohgiraffers.mainservice.statistics.query.dto.request.DisposalCostRequest;
+import com.ohgiraffers.mainservice.statistics.query.dto.request.MonthlyPurchaseRequest;
+import com.ohgiraffers.mainservice.statistics.query.dto.response.*;
+import com.ohgiraffers.mainservice.statistics.query.mapper.StatisticsMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.ohgiraffers.hw22thteamproject.statistics.query.mapper.StatisticsMapper;
 
 @Service
 @RequiredArgsConstructor

@@ -1,11 +1,12 @@
 package com.ohgiraffers.mainservice.recipe.query.controller;
 
-import com.ohgiraffers.hw22thteamproject.common.dto.ApiResponse;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.DishCategoryDTO;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.DishDTO;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.RecipeDetailResponse;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.RecommendRecipeDTO; // Added
-import com.ohgiraffers.hw22thteamproject.recipe.query.service.RecipeQueryService;
+
+import com.ohgiraffers.mainservice.common.dto.ApiResponse;
+import com.ohgiraffers.mainservice.recipe.query.dto.response.DishCategoryDTO;
+import com.ohgiraffers.mainservice.recipe.query.dto.response.DishDTO;
+import com.ohgiraffers.mainservice.recipe.query.dto.response.RecipeDetailResponse;
+import com.ohgiraffers.mainservice.recipe.query.dto.response.RecommendRecipeDTO;
+import com.ohgiraffers.mainservice.recipe.query.service.RecipeQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

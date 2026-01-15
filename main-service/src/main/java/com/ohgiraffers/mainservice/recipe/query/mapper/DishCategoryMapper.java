@@ -1,7 +1,8 @@
 package com.ohgiraffers.mainservice.recipe.query.mapper;
 
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.DishCategoryDTO;
 
+
+import com.ohgiraffers.mainservice.recipe.query.dto.response.DishCategoryDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,7 +1,8 @@
 package com.ohgiraffers.mainservice.recipe.query.dto.response;
 
+import com.ohgiraffers.mainservice.recipe.command.domain.aggregate.Recipe;
 import io.swagger.v3.oas.annotations.media.Schema;
-import com.ohgiraffers.hw22thteamproject.recipe.command.domain.aggregate.Recipe;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

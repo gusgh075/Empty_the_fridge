@@ -3,19 +3,19 @@ package com.ohgiraffers.mainservice.statistics.query.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.ohgiraffers.mainservice.common.dto.ApiResponse;
+import com.ohgiraffers.mainservice.statistics.query.dto.request.DisposalCostRequest;
+import com.ohgiraffers.mainservice.statistics.query.dto.request.MonthlyPurchaseRequest;
+import com.ohgiraffers.mainservice.statistics.query.dto.response.CategoryPurchaseDTO;
+import com.ohgiraffers.mainservice.statistics.query.dto.response.DisposalCostResponse;
+import com.ohgiraffers.mainservice.statistics.query.dto.response.IngredientPurchaseDTO;
+import com.ohgiraffers.mainservice.statistics.query.dto.response.MonthlyDisposalDTO;
+import com.ohgiraffers.mainservice.statistics.query.service.StatisticsQueryService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ohgiraffers.hw22thteamproject.common.dto.ApiResponse;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.request.DisposalCostRequest;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.request.MonthlyPurchaseRequest;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.response.CategoryPurchaseDTO;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.response.DisposalCostResponse;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.response.IngredientPurchaseDTO;
-import com.ohgiraffers.hw22thteamproject.statistics.query.dto.response.MonthlyDisposalDTO;
-import com.ohgiraffers.hw22thteamproject.statistics.query.service.StatisticsQueryService;
 
 @RestController
 @RequiredArgsConstructor

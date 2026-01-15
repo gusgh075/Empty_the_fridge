@@ -1,15 +1,12 @@
 package com.ohgiraffers.mainservice.recipe.query.service;
 
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.DishCategoryDTO;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.DishDTO;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.RecipeDTO;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.RecipeDetailResponse;
-import com.ohgiraffers.hw22thteamproject.recipe.query.dto.response.RecommendRecipeDTO; // Added
-import com.ohgiraffers.hw22thteamproject.recipe.query.mapper.DishCategoryMapper;
-import com.ohgiraffers.hw22thteamproject.recipe.query.mapper.DishMapper;
-import com.ohgiraffers.hw22thteamproject.recipe.query.mapper.RecipeMapper;
-import com.ohgiraffers.hw22thteamproject.recipe.query.mapper.RecommendRecipeMapper; // Added
 
+
+import com.ohgiraffers.mainservice.recipe.query.dto.response.*;
+import com.ohgiraffers.mainservice.recipe.query.mapper.DishCategoryMapper;
+import com.ohgiraffers.mainservice.recipe.query.mapper.DishMapper;
+import com.ohgiraffers.mainservice.recipe.query.mapper.RecipeMapper;
+import com.ohgiraffers.mainservice.recipe.query.mapper.RecommendRecipeMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
