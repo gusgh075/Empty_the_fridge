@@ -7,4 +7,5 @@ spring:
     config:
       server:
         git:
-          uri: C:\JHH_project\masroot\config
+          uri: /Users/SinwooKim/Desktop/SWCAMP22/Empty_the_fridge/config
+          # /Users/SinwooKim/Desktop/SWCAMP22/Empty_the_fridge/config
