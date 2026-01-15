@@ -15,7 +15,7 @@ import java.time.Duration;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 public class UserAuthCommandController {
 
     private final UserCommandService userCommandService;

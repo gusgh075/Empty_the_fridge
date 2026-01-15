@@ -57,10 +57,10 @@ public class SecurityConfig {
                         auth
                                 .requestMatchers(
                                         HttpMethod.POST,
-                                        "/api/v1/users",
-                                        "/api/v1/auth/login"
+                                        "/users",
+                                        "/auth/login"
                                 ).permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1/users/").hasAuthority("USER")
+                                .requestMatchers(HttpMethod.GET, "/users/").hasAuthority("USER")
                                 // DB삽입 오류로 인한 401에러 차단
                                 .requestMatchers("/error").permitAll()
                                 // swagger api

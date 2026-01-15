@@ -1,123 +1,74 @@
-### User Service API Test
-### These tests verify the user-service endpoints
-
-### ============================================
-### User Query Endpoints
-### ============================================
-
-### Get User by UserNo (NEW endpoint for Feign client)
-GET http://localhost:59364/api/v1/users/by-no/1
-Content-Type: application/json
-
-###
-
-### Get User by UserId
-GET http://localhost:59364/api/v1/users/testuser
-Content-Type: application/json
-
-###
-
-### Get My Info (requires authentication)
-GET http://localhost:59364/api/v1/users/myinfo
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
-
-###
-
-### ============================================
-### User Auth Endpoints
-### ============================================
-
-### Login
-POST http://localhost:62319/api/v1/auth/login
+### 회원가입
+POST http://localhost:8000/api/v1/user-service/users
 Content-Type: application/json
 
 {
-  "userId": "newuser01",
-  "password": "password1!"
+  "userId": "testuser01",
+  "password": "testuserpwd@",
+  "nickname": "sinwooTest",
+  "email": "testuser01@gmail.xom",
+  "phoneNum": "01012345678",
+  "birthdate": "2025-06-06"
+}
+
+### 로그인
+POST http://localhost:8000/api/v1/user-service/auth/login
+Content-Type: application/json
+
+{
+  "userId": "testuser01",
+  "password": "password#"
 }
 
 > {%
-    // 로그인 결과(응답) 중 accessToken을 auth_token 변수에 저장
+    // 응답 결과에서 accessToken 값을 추출하여 auth_token 변수에 저장
     client.global.set("auth_token", response.body.data.accessToken);
     client.global.set("refresh_token", response.body.data.refreshToken);
 %}
 
-###
-
-### Logout
-POST http://localhost:59364/api/v1/auth/logout
-Content-Type: application/json
-Cookie: refreshToken={{auth_token}}
-
-###
-
-### ============================================
-### User Command Endpoints
-### ============================================
-
-### Register New User
-POST http://localhost:62319/api/v1/users
-Content-Type: application/json
-
-{
-  "userId": "newuser01",
-  "password": "password1!",
-  "nickname": "NewUser",
-  "email": "newuser@example.com",
-  "phoneNum": "01011119999",
-  "birthdate": "1990-01-01"
-}
-
-###
-
-### Update User Info (requires authentication)
-PATCH http://localhost:59364/api/v1/users
-Content-Type: application/json
+### 조회 {user_id}
+GET http://localhost:8000/api/v1/user-service/users/testuser01
+Accept: application/json
 Authorization: Bearer {{auth_token}}
 
-{
-  "email": "updated@example.com",
-  "phoneNum": "01087654321"
-}
-
-###
-
-### Update Password (requires authentication)
-PATCH http://localhost:59364/api/v1/users/password
-Content-Type: application/json
+### 조회 {user_no}
+GET http://localhost:8000/api/v1/user-service/users/by-no/2
+Accept: application/json
 Authorization: Bearer {{auth_token}}
 
-{
-  "resentPassword": "test1234!",
-  "newPassword": "newpass1!",
-  "checkNewPassword": "newpass1!"
-}
-
-###
-
-### Delete User (requires authentication)
-DELETE http://localhost:59364/api/v1/users
-Content-Type: application/json
+### 내정보(로그인유저) 조회
+GET http://localhost:8000/api/v1/user-service/users/myinfo
+Accept: application/json
 Authorization: Bearer {{auth_token}}
 
-###
-
-### ============================================
-### Via Gateway (port 8000)
-### ============================================
-
-### Get User by UserNo via Gateway
-GET http://localhost:8000/api/v1/user-service/users/by-no/1
-Content-Type: application/json
-
-###
-
-### Login via Gateway
-POST http://localhost:8000/user-service/api/v1/auth/login
+### 회원정보 수정 (email, phoneNum)
+PATCH http://localhost:8000/api/v1/user-service/users
+Accept: application/json
+Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
-  "userId": "testuser",
-  "password": "test1234!"
+  "email": "rlatlsdn98@gmail.com",
+  "phoneNum": "010-9999-1192"
 }
+
+### 회원정보 수정 (password)
+PATCH http://localhost:8000/api/v1/user-service/users/password
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "resentPassword": "testuserpwd@",
+  "newPassword": "password#",
+  "checkNewPassword": "password#"
+}
+
+### 로그아웃
+POST http://localhost:8000/api/v1/user-service/auth/logout
+Authorization: Bearer {{auth_token}}
+
+### 회원탈퇴
+DELETE http://localhost:8000/api/v1/user-service/users
+Accept: application/json
+Authorization: Bearer {{auth_token}}
