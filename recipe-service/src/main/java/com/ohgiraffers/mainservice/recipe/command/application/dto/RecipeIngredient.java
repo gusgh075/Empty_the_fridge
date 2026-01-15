@@ -7,12 +7,16 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 레시피에 들어갈 개별 Ingredient를 담는 클래스
  */
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "레시피 재료 정보")
 public class RecipeIngredient {
 	@Schema(description = "재료 이름", example = "당근")

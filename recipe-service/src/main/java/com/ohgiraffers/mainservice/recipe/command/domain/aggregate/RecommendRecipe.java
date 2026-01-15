@@ -3,13 +3,19 @@ package com.ohgiraffers.mainservice.recipe.command.domain.aggregate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "rcd_recipe")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RecommendRecipe {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,12 @@
 package com.ohgiraffers.mainservice.recipe.command.application.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ohgiraffers.mainservice.common.client.UserServiceClient;
 import com.ohgiraffers.mainservice.common.dto.ApiResponse;
 import com.ohgiraffers.mainservice.common.dto.UserDTO;
@@ -18,12 +25,8 @@ import com.ohgiraffers.mainservice.recipe.command.domain.repository.RecipeReposi
 import com.ohgiraffers.mainservice.recipe.command.domain.repository.RecommendRecipeRepository;
 import com.ohgiraffers.mainservice.recipe.command.infrastructure.service.RecipeRecommendService;
 import com.ohgiraffers.mainservice.recipe.query.dto.response.RecipeDTO;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -41,14 +44,14 @@ public class RecipeCommandService {
 
 		// 1. Dish 조회
 		Dish dish = dishRepository.findByDishName(request.getDishName())
-				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 음식입니다."));
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 음식입니다."));
 
 		// 2. Recipe 생성
 		Recipe savedRecipe = Recipe.builder()
-				.dish(dish)
-				.recipeIngredient(RecipeIngredient.listToString(request.getIngredients()))
-				.recipeCookery(CookeryUtils.listToString(request.getCookery()))
-				.build();
+			.dish(dish)
+			.recipeIngredient(RecipeIngredient.listToString(request.getIngredients()))
+			.recipeCookery(CookeryUtils.listToString(request.getCookery()))
+			.build();
 
 		return recipeRepository.save(savedRecipe).getId();
 	}
@@ -58,7 +61,7 @@ public class RecipeCommandService {
 
 		// Recipe Entity
 		Recipe updatedRecipe = recipeRepository.findById(request.getRecipeNo())
-				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 레시피입니다."));
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 레시피입니다."));
 
 		// 재료 수정
 		List<RecipeIngredient> ingredients = request.getIngredients();
@@ -83,11 +86,23 @@ public class RecipeCommandService {
 		// 1. AI 추천 서비스 호출
 		RecommendRecipeResponse recipeRecommendation = recipeRecommendService.getRecipeRecommendation(request);
 
+		recipeRecommendation = RecommendRecipeResponse.createDummyResponse();
 		// 2. 추천 결과 저장용 엔티티 변환
-		RecommendRecipe recommendRecipe = modelMapper.map(recipeRecommendation, RecommendRecipe.class);
-
+		RecommendRecipe recommendRecipe = RecommendRecipe.builder()
+			.userNo(Integer.parseInt(String.valueOf(userNo)))
+			.dishCategoryNo(recipeRecommendation.getDishCategoryEnum().ordinal() + 1)
+			.rcdRecipeDishName(recipeRecommendation.getDishName())
+			.rcdRecipeIngredients(RecipeIngredient.listToString(recipeRecommendation.getIngredients()))
+			.rcdRecipeSubstitutions(
+				recipeRecommendation.getSubstitutions().stream()
+					.map(s -> s.getOriginal() + " -> " + s.getReplacement())
+					.collect(Collectors.joining(", "))
+			)
+			.rcdRecipeCookery(CookeryUtils.listToString(recipeRecommendation.getCookery()))
+			.rcdRecipeTips(CookeryUtils.listToString(recipeRecommendation.getTips()))
+			.userNo(userNo.intValue())
+			.build();
 		// 4. RecommendRecipe 엔티티의 userNo 필드 타입에 맞게 설정 (int로 가정)
-		recommendRecipe.setUserNo(userNo.intValue());
 
 		recommendRecipeRepository.save(recommendRecipe);
 		return recipeRecommendation;
@@ -97,18 +112,18 @@ public class RecipeCommandService {
 	public RecipeDTO saveRecommendedToMyRecipe(Integer recommendRecipeNo, Integer dishNo) {
 		// 음식 조회
 		Dish dish = dishRepository.findById(dishNo)
-				.orElseThrow(() -> new IllegalArgumentException("음식이 조회되지 않습니다"));
+			.orElseThrow(() -> new IllegalArgumentException("음식이 조회되지 않습니다"));
 		// 추천레시피 조회
 		RecommendRecipe rcdRecipe = recommendRecipeRepository.findById(recommendRecipeNo)
-				.orElseThrow(() -> new IllegalArgumentException("추천레시피 데이터 없음"));
+			.orElseThrow(() -> new IllegalArgumentException("추천레시피 데이터 없음"));
 		return RecipeDTO.from(
-				recipeRepository.save(
-						Recipe.builder()
-								.dish(dish)
-								.recipeIngredient(rcdRecipe.getRcdRecipeIngredients())
-								.recipeCookery(rcdRecipe.getRcdRecipeCookery())
-								.build())
-				);
+			recipeRepository.save(
+				Recipe.builder()
+					.dish(dish)
+					.recipeIngredient(rcdRecipe.getRcdRecipeIngredients())
+					.recipeCookery(rcdRecipe.getRcdRecipeCookery())
+					.build())
+		);
 	}
 
 	private Long getUserNoByUserId(String userId) {
