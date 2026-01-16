@@ -1,3 +1,7 @@
+@dishNo = 14
+@recipeNo = 7
+@rcdRecipeNo = 5
+
 ### User Services
 ### 1. 회원가입
 POST http://localhost:8000/api/v1/user-service/users
@@ -44,13 +48,13 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-    "dishNo": 2,
+    "dishNo": {{dishNo}},
     "dishName": "참치 김치찌개",
     "dishCategoryEnum": "KOREAN"
 }
 
 ### 5. 요리 삭제
-DELETE http://localhost:8000/api/v1/recipe-service/dishes/2
+DELETE http://localhost:8000/api/v1/recipe-service/dishes/{{dishNo}}
 Authorization: Bearer {{auth_token}}
 
 
@@ -88,7 +92,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-    "recipeNo": 3,
+    "recipeNo": {{recipeNo}},
     "ingredients": [
          {
             "name": "김치",
@@ -108,7 +112,7 @@ Authorization: Bearer {{auth_token}}
 }
 
 ### 8. 레시피 삭제
-DELETE http://localhost:8000/api/v1/recipe-service/recipes/delete?recipeNo=2
+DELETE http://localhost:8000/api/v1/recipe-service/recipes/delete?recipeNo={{recipeNo}}
 Authorization: Bearer {{auth_token}}
 
 
@@ -129,7 +133,7 @@ Authorization: Bearer {{auth_token}}
 }
 
 ### 10. 추천 레시피 저장
-GET http://localhost:8000/api/v1/recipe-service/recipes/recommend/save?recommendRecipeNo=1
+GET http://localhost:8000/api/v1/recipe-service/recipes/recommend/save?recommendRecipeNo={{rcdRecipeNo}}
 Authorization: Bearer {{auth_token}}
 
 
