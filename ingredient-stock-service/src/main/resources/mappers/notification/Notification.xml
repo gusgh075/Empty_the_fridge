@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.ingredientstockservice.notification.query.mapper.NotificationMapper">
+
+    <resultMap id="NotificationResultMap"
+               type="com.ohgiraffers.ingredientstockservice.notification.query.dto.response.NotificationDTO">
+        <id property="notificationNo" column="notification_no"/>
+        <result property="userNo" column="user_no"/>
+        <result property="notificationTypeNo" column="notification_type_no"/>
+        <result property="notificationTypeName" column="notification_type_name"/>
+        <result property="notificationContent" column="notification_content"/>
+        <result property="isChecked" column="notification_is_checked"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="getNotificationsByUserNo" resultMap="NotificationResultMap">
+        SELECT
+            n.notification_no,
+            n.user_no,
+            n.notification_type_no,
+            nt.notification_type_name,
+            n.notification_content,
+            n.notification_is_checked,
+            n.created_at,
+            n.updated_at
+        FROM notification n
+        JOIN notification_type nt ON n.notification_type_no = nt.notification_type_no
+        WHERE n.user_no = #{userNo}
+        ORDER BY n.created_at DESC
+    </select>
+</mapper>

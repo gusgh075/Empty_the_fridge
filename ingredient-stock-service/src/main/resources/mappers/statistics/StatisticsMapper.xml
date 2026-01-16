@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.ingredientstockservice.statistics.query.mapper.StatisticsMapper">
+    <resultMap id="MonthlyPurchaseMap" type="com.ohgiraffers.ingredientstockservice.statistics.query.dto.response.MonthlyPurchaseDTO">
+        <result column="ingredient_stock_name" property="name"/>
+        <result column="ingredient_stock_category" property="category"/>
+        <result column="quantity_unit" property="quantity"/>
+        <result column="ingredient_stock_total_cost" property="cost"/>
+        <result column="ingredient_stock_bought_at" property="purchaseDate"/>
+    </resultMap>
+    <select id="selectMonthlyPurchaseList" parameterType="map" resultMap="MonthlyPurchaseMap">
+        SELECT
+        ingredient_stock_name,
+        ingredient_stock_total_cost,
+        ingredient_stock_bought_at,
+        ingredient_stock_category,
+        CONCAT(ingredient_stock_total_quantity, ingredient_stock_unit) AS quantity_unit
+        FROM ingredient_stock
+        WHERE user_no = #{userNo}
+        AND DATE_FORMAT(ingredient_stock_bought_at, '%Y-%m') = #{monthlyPurchaseRequest.chosenMonth}
+        ORDER BY ingredient_stock_bought_at DESC
+    </select>
+
+    <resultMap id="IngredientPurchaseMap" type="com.ohgiraffers.ingredientstockservice.statistics.query.dto.response.IngredientPurchaseDTO">
+        <result column="ingredient_stock_name" property="name"/>
+        <result column="total_cost"            property="totalCost"/>
+    </resultMap>
+    <select id="selectIngredientPurchaseList" resultMap="IngredientPurchaseMap">
+        SELECT
+        ingredient_stock_name,
+        SUM(ingredient_stock_total_cost) AS total_cost
+        FROM ingredient_stock
+        WHERE user_no = #{userNo}
+        GROUP BY ingredient_stock_name
+        ORDER BY total_cost DESC
+    </select>
+
+    <resultMap id="CategoryPurchaseMap" type="com.ohgiraffers.ingredientstockservice.statistics.query.dto.response.CategoryPurchaseDTO">
+        <result property="category" column="ingredient_stock_category"
+                javaType="com.ohgiraffers.ingredientstockservice.statistics.query.dto.response.IngredientCategory"/>
+        <result property="totalCost" column="total_cost"/>
+    </resultMap>
+    <select id="selectCategoryPurchaseList" resultMap="CategoryPurchaseMap">
+        SELECT
+        ingredient_stock_category,
+        COALESCE(SUM(ingredient_stock_total_cost), 0) AS total_cost
+        FROM ingredient_stock
+        WHERE user_no = #{userNo}
+        GROUP BY ingredient_stock_category
+        ORDER BY total_cost DESC
+    </select>
+
+    <resultMap id="DisposalCostMap" type="com.ohgiraffers.ingredientstockservice.statistics.query.dto.response.DisposalCostDTO">
+        <result property="disposalCost" column="disposal_cost"/>
+    </resultMap>
+    <select id="selectDisposalCostList" resultMap="DisposalCostMap">
+        SELECT
+        disposal_cost
+        FROM disposal_histories
+        WHERE user_no = #{userNo}
+        <if test="disposalCostRequest.startDate != null and disposalCostRequest.startDate != ''">
+            AND disposal_at &gt;= #{disposalCostRequest.startDate}
+        </if>
+        <if test="disposalCostRequest.endDate != null and disposalCostRequest.endDate != ''">
+            AND disposal_at &lt;= #{disposalCostRequest.endDate}
+        </if>
+    </select>
+
+    <resultMap id="MonthlyStatsResultMap" type="com.ohgiraffers.ingredientstockservice.statistics.query.dto.response.MonthlyDisposalDTO">
+        <result property="statMonth" column="stat_month" />
+        <result property="totalCost" column="total_cost" />
+        <result property="discardCost" column="discard_cost" />
+        <result property="wasteRate" column="waste_rate" />
+    </resultMap>
+    <select id="selectMonthlyDisposalList" parameterType="Long" resultMap="MonthlyStatsResultMap">
+        SELECT
+        temp.month_date AS stat_month,
+        SUM(temp.buy_amount) AS total_cost,
+        SUM(temp.waste_amount) AS discard_cost,
+        CASE
+        WHEN SUM(temp.buy_amount) = 0 THEN 0
+        ELSE ROUND((SUM(temp.waste_amount) / SUM(temp.buy_amount)) * 100, 2)
+        END AS waste_rate
+        FROM (
+        <!--(A) 재고 테이블: 구매 금액 집계 (최근 6개월)-->
+        SELECT
+        DATE_FORMAT(ingredient_stock_bought_at, '%Y-%m') AS month_date,
+        ingredient_stock_total_cost AS buy_amount,
+        0 AS waste_amount
+        FROM ingredient_stock
+        WHERE user_no = #{userNo}
+        AND ingredient_stock_bought_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+
+        UNION ALL
+
+        <!--(B) 폐기 이력 테이블: 폐기 비용 집계 (최근 6개월)-->
+        SELECT
+        DATE_FORMAT(disposal_at, '%Y-%m') AS month_date,
+        0 AS buy_amount,
+        disposal_cost AS waste_amount
+        FROM disposal_histories
+        WHERE user_no = #{userNo}
+        AND disposal_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+        ) temp
+        GROUP BY temp.month_date
+        ORDER BY temp.month_date ASC
+    </select>
+</mapper>

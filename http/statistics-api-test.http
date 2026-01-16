@@ -1,0 +1,39 @@
+### User Services - Login (Token)
+POST http://localhost:8000/api/v1/user-service/auth/login
+Content-Type: application/json
+
+{
+  "userId": "testuser01",
+  "password": "password#"
+}
+
+
+> {%
+    client.global.set("auth_token", response.body.data.accessToken);
+    client.log("Auth Token: " + client.global.get("auth_token"));
+%}
+
+### Statistics Service
+
+### 1. 월별 구매 상세 내역 조회
+# chosenMonth format: YYYY-MM (Assumed based on naming)
+GET http://localhost:8000/api/v1/ingredient-stock-service/statistics/monthly?chosenMonth=2026-01
+Authorization: Bearer {{auth_token}}
+
+### 2. 재료별 구매 통계 조회
+# Note: URL contains typo 'ingreient' as defined in controller
+GET http://localhost:8000/api/v1/ingredient-stock-service/statistics/ingreient
+Authorization: Bearer {{auth_token}}
+
+### 3. 카테고리별 지출 통계 조회
+GET http://localhost:8000/api/v1/ingredient-stock-service/statistics/category
+Authorization: Bearer {{auth_token}}
+
+### 4. 폐기 비용 조회
+# startDate, endDate format: YYYY-MM-DD
+GET http://localhost:8000/api/v1/ingredient-stock-service/statistics/disposal?startDate=2026-01-01&endDate=2026-01-31
+Authorization: Bearer {{auth_token}}
+
+### 5. 월별 폐기 내역 조회
+GET http://localhost:8000/api/v1/ingredient-stock-service/statistics/monthly-disposal
+Authorization: Bearer {{auth_token}}

@@ -1,0 +1,164 @@
+@dishNo = 14
+@recipeNo = 7
+@rcdRecipeNo = 5
+
+### User Services
+### 1. 회원가입
+POST http://localhost:8000/api/v1/user-service/users
+Content-Type: application/json
+
+{
+    "userId": "gusgh075",
+    "password": "Password123!",
+    "nickname": "Hyun",
+    "email": "gusgh075@gmail.com",
+    "phoneNum": "010-1234-5678",
+    "birthdate": "1999-01-01"
+}
+
+### 2. 로그인 (토큰 획득)
+POST http://localhost:8000/api/v1/user-service/auth/login
+Content-Type: application/json
+
+{
+    "userId": "gusgh075",
+    "password": "Password123!"
+}
+
+> {%
+    client.global.set("auth_token", response.body.data.accessToken);
+    client.log("Auth Token: " + client.global.get("auth_token"));
+%}
+
+### Recipe Services - Dish Command
+
+### 3. 요리 등록
+POST http://localhost:8000/api/v1/recipe-service/dishes
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "dishName": "김치찌개",
+    "dishCategoryEnum": "KOREAN"
+}
+
+### 4. 요리 수정
+PUT http://localhost:8000/api/v1/recipe-service/dishes/update
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "dishNo": {{dishNo}},
+    "dishName": "참치 김치찌개",
+    "dishCategoryEnum": "KOREAN"
+}
+
+### 5. 요리 삭제
+DELETE http://localhost:8000/api/v1/recipe-service/dishes/{{dishNo}}
+Authorization: Bearer {{auth_token}}
+
+
+### Recipe Services - Recipe Command
+
+### 6. 레시피 등록
+POST http://localhost:8000/api/v1/recipe-service/recipes
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "dishName": "김치찌개",
+    "ingredients": [
+        {
+            "name": "김치",
+            "amount": 1,
+            "unit": "포기"
+        },
+        {
+            "name": "돼지고기",
+            "amount": 300,
+            "unit": "g"
+        }
+    ],
+    "cookery": [
+        "김치를 볶는다.",
+        "물을 붓고 끓인다.",
+        "고기를 넣고 익힌다."
+    ]
+}
+
+### 7. 레시피 수정
+PUT http://localhost:8000/api/v1/recipe-service/recipes/update
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "recipeNo": {{recipeNo}},
+    "ingredients": [
+         {
+            "name": "김치",
+            "amount": 0.5,
+            "unit": "포기"
+        },
+        {
+            "name": "참치",
+            "amount": 1,
+            "unit": "캔"
+        }
+    ],
+    "cookery": [
+        "김치와 참치를 볶는다.",
+        "물을 붓고 끓인다."
+    ]
+}
+
+### 8. 레시피 삭제
+DELETE http://localhost:8000/api/v1/recipe-service/recipes/delete?recipeNo={{recipeNo}}
+Authorization: Bearer {{auth_token}}
+
+
+### 9. 레시피 추천 요청
+POST http://localhost:8000/api/v1/recipe-service/recipes/recommend
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "dishName": "파스타",
+    "ingredients": ["면", "토마토 소스"],
+    "dislikedIngredients": ["오이"],
+    "skillLevel": "BEGINNER",
+    "tools": ["냄비", "프라이팬"],
+    "foodTypes": ["WESTERN"],
+    "preference": "매콤한 맛",
+    "servings": 2
+}
+
+### 10. 추천 레시피 저장
+GET http://localhost:8000/api/v1/recipe-service/recipes/recommend/save?recommendRecipeNo={{rcdRecipeNo}}
+Authorization: Bearer {{auth_token}}
+
+
+### Recipe Services - Query
+
+### 11. 전체 요리 카테고리 조회
+GET http://localhost:8000/api/v1/recipe-service/recipes/categories
+Authorization: Bearer {{auth_token}}
+
+### 12. 내 요리 목록 조회
+GET http://localhost:8000/api/v1/recipe-service/recipes/my
+Authorization: Bearer {{auth_token}}
+
+### 13. 특정 사용자 요리 목록 조회
+GET http://localhost:8000/api/v1/recipe-service/recipes/users/1
+Authorization: Bearer {{auth_token}}
+
+### 14. 특정 사용자 요리 상세 정보 목록 조회
+GET http://localhost:8000/api/v1/recipe-service/recipes/users/1/details
+Authorization: Bearer {{auth_token}}
+
+### 15. 특정 사용자 추천 레시피 목록 조회
+GET http://localhost:8000/api/v1/recipe-service/recipes/recommends/users/1
+Authorization: Bearer {{auth_token}}
+
+### 16. 요리 상세 정보 조회
+GET http://localhost:8000/api/v1/recipe-service/recipes/1
+Authorization: Bearer {{auth_token}}
