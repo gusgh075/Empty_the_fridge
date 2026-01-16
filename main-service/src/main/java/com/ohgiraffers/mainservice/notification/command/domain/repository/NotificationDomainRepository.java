@@ -1,8 +1,8 @@
-package com.ohgiraffers.mainservice.notification.command.domain.repository;
+package com.ohgiraffers.recipeservice.notification.command.domain.repository;
 
 
 
-import com.ohgiraffers.mainservice.notification.command.domain.aggregate.Notification;
+import com.ohgiraffers.recipeservice.notification.command.domain.aggregate.Notification;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package com.ohgiraffers.mainservice.statistics.query.mapper;
+package com.ohgiraffers.recipeservice.statistics.query.mapper;
 
 import java.util.List;
 
 
-import com.ohgiraffers.mainservice.statistics.query.dto.request.DisposalCostRequest;
-import com.ohgiraffers.mainservice.statistics.query.dto.request.MonthlyPurchaseRequest;
-import com.ohgiraffers.mainservice.statistics.query.dto.response.*;
+import com.ohgiraffers.recipeservice.statistics.query.dto.request.DisposalCostRequest;
+import com.ohgiraffers.recipeservice.statistics.query.dto.request.MonthlyPurchaseRequest;
+import com.ohgiraffers.recipeservice.statistics.query.dto.response.*;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

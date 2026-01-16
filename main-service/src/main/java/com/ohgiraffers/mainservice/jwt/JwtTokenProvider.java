@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.jwt;
+package com.ohgiraffers.recipeservice.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

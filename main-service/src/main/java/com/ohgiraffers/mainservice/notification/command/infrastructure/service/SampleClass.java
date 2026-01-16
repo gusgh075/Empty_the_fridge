@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.notification.command.infrastructure.service;
+package com.ohgiraffers.recipeservice.notification.command.infrastructure.service;
 
 public class SampleClass {
 }

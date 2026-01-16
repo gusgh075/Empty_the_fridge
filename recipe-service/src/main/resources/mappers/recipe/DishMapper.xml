@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ohgiraffers.mainservice.recipe.query.mapper.DishMapper">
-    <resultMap id="DishResultMap" type="com.ohgiraffers.mainservice.recipe.query.dto.response.DishDTO">
+<mapper namespace="com.ohgiraffers.recipeservice.recipe.query.mapper.DishMapper">
+    <resultMap id="DishResultMap" type="com.ohgiraffers.recipeservice.recipe.query.dto.response.DishDTO">
         <id property="dishNo" column="dish_no"/>
         <result property="userNo" column="user_no"/>
         <result property="dishCategoryNo" column="dish_category_no"/>

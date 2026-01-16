@@ -1,16 +1,16 @@
-package com.ohgiraffers.mainservice.statistics.query.controller;
+package com.ohgiraffers.recipeservice.statistics.query.controller;
 
 import java.util.List;
 import java.util.Map;
 
-import com.ohgiraffers.mainservice.common.dto.ApiResponse;
-import com.ohgiraffers.mainservice.statistics.query.dto.request.DisposalCostRequest;
-import com.ohgiraffers.mainservice.statistics.query.dto.request.MonthlyPurchaseRequest;
-import com.ohgiraffers.mainservice.statistics.query.dto.response.CategoryPurchaseDTO;
-import com.ohgiraffers.mainservice.statistics.query.dto.response.DisposalCostResponse;
-import com.ohgiraffers.mainservice.statistics.query.dto.response.IngredientPurchaseDTO;
-import com.ohgiraffers.mainservice.statistics.query.dto.response.MonthlyDisposalDTO;
-import com.ohgiraffers.mainservice.statistics.query.service.StatisticsQueryService;
+import com.ohgiraffers.recipeservice.common.dto.ApiResponse;
+import com.ohgiraffers.recipeservice.statistics.query.dto.request.DisposalCostRequest;
+import com.ohgiraffers.recipeservice.statistics.query.dto.request.MonthlyPurchaseRequest;
+import com.ohgiraffers.recipeservice.statistics.query.dto.response.CategoryPurchaseDTO;
+import com.ohgiraffers.recipeservice.statistics.query.dto.response.DisposalCostResponse;
+import com.ohgiraffers.recipeservice.statistics.query.dto.response.IngredientPurchaseDTO;
+import com.ohgiraffers.recipeservice.statistics.query.dto.response.MonthlyDisposalDTO;
+import com.ohgiraffers.recipeservice.statistics.query.service.StatisticsQueryService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;

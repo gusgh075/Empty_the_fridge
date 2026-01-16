@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.recipe.command.domain.aggregate;
+package com.ohgiraffers.recipeservice.recipe.command.domain.aggregate;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

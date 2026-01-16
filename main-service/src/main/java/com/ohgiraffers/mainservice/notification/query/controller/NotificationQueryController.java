@@ -1,8 +1,8 @@
-package com.ohgiraffers.mainservice.notification.query.controller;
+package com.ohgiraffers.recipeservice.notification.query.controller;
 
-import com.ohgiraffers.mainservice.common.dto.ApiResponse;
-import com.ohgiraffers.mainservice.notification.query.dto.response.NotificationResponse;
-import com.ohgiraffers.mainservice.notification.query.service.NotificationQueryService;
+import com.ohgiraffers.recipeservice.common.dto.ApiResponse;
+import com.ohgiraffers.recipeservice.notification.query.dto.response.NotificationResponse;
+import com.ohgiraffers.recipeservice.notification.query.service.NotificationQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;

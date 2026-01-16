@@ -1,8 +1,8 @@
-package com.ohgiraffers.mainservice.common.client;
+package com.ohgiraffers.recipeservice.common.client;
 
-import com.ohgiraffers.mainservice.common.dto.ApiResponse;
-import com.ohgiraffers.mainservice.common.dto.UserDetailResponse;
-import com.ohgiraffers.mainservice.config.FeignClientConfig;
+import com.ohgiraffers.recipeservice.common.dto.ApiResponse;
+import com.ohgiraffers.recipeservice.common.dto.UserDetailResponse;
+import com.ohgiraffers.recipeservice.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

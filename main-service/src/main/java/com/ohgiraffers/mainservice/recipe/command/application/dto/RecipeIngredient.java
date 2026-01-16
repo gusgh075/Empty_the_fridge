@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.recipe.command.application.dto;
+package com.ohgiraffers.recipeservice.recipe.command.application.dto;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.ohgiraffers.mainservice.notification.query.mapper;
+package com.ohgiraffers.recipeservice.notification.query.mapper;
 
-import com.ohgiraffers.mainservice.notification.query.dto.response.NotificationDTO;
+import com.ohgiraffers.recipeservice.notification.query.dto.response.NotificationDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

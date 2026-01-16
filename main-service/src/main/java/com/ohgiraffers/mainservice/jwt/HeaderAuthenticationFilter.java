@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.jwt;
+package com.ohgiraffers.recipeservice.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

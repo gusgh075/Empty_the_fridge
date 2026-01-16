@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.statistics.query.dto.response;
+package com.ohgiraffers.recipeservice.statistics.query.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;

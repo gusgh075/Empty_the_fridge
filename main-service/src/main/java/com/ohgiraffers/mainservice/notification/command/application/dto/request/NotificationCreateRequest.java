@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.notification.command.application.dto.request;
+package com.ohgiraffers.recipeservice.notification.command.application.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,10 +1,10 @@
-package com.ohgiraffers.mainservice.recipe.command.application.controller;
+package com.ohgiraffers.recipeservice.recipe.command.application.controller;
 
 
-import com.ohgiraffers.mainservice.common.dto.ApiResponse;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.request.DishCreateRequest;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.request.DishUpdateRequest;
-import com.ohgiraffers.mainservice.recipe.command.application.service.DishCommandService;
+import com.ohgiraffers.recipeservice.common.dto.ApiResponse;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.request.DishCreateRequest;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.request.DishUpdateRequest;
+import com.ohgiraffers.recipeservice.recipe.command.application.service.DishCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

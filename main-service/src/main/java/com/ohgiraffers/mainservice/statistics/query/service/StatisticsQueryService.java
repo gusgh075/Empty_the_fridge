@@ -1,10 +1,10 @@
-package com.ohgiraffers.mainservice.statistics.query.service;
+package com.ohgiraffers.recipeservice.statistics.query.service;
 
-import com.ohgiraffers.mainservice.jwt.JwtTokenProvider;
-import com.ohgiraffers.mainservice.statistics.query.dto.request.DisposalCostRequest;
-import com.ohgiraffers.mainservice.statistics.query.dto.request.MonthlyPurchaseRequest;
-import com.ohgiraffers.mainservice.statistics.query.dto.response.*;
-import com.ohgiraffers.mainservice.statistics.query.mapper.StatisticsMapper;
+import com.ohgiraffers.recipeservice.jwt.JwtTokenProvider;
+import com.ohgiraffers.recipeservice.statistics.query.dto.request.DisposalCostRequest;
+import com.ohgiraffers.recipeservice.statistics.query.dto.request.MonthlyPurchaseRequest;
+import com.ohgiraffers.recipeservice.statistics.query.dto.response.*;
+import com.ohgiraffers.recipeservice.statistics.query.mapper.StatisticsMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;

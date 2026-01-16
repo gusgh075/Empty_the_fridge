@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.config;
+package com.ohgiraffers.recipeservice.config;
 
 
 import io.swagger.v3.oas.models.OpenAPI;

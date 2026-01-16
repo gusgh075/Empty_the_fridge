@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.notification.command.domain.aggregate;
+package com.ohgiraffers.recipeservice.notification.command.domain.aggregate;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

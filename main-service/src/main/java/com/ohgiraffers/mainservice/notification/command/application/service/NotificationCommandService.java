@@ -1,12 +1,12 @@
-package com.ohgiraffers.mainservice.notification.command.application.service;
+package com.ohgiraffers.recipeservice.notification.command.application.service;
 
-import com.ohgiraffers.mainservice.exception.BusinessException;
-import com.ohgiraffers.mainservice.exception.ErrorCode;
-import com.ohgiraffers.mainservice.notification.command.application.dto.request.NotificationCreateRequest;
-import com.ohgiraffers.mainservice.notification.command.domain.aggregate.Notification;
-import com.ohgiraffers.mainservice.notification.command.domain.aggregate.NotificationType;
-import com.ohgiraffers.mainservice.notification.command.domain.repository.NotificationDomainRepository;
-import com.ohgiraffers.mainservice.notification.command.domain.repository.NotificationTypeDomainRepository;
+import com.ohgiraffers.recipeservice.exception.BusinessException;
+import com.ohgiraffers.recipeservice.exception.ErrorCode;
+import com.ohgiraffers.recipeservice.notification.command.application.dto.request.NotificationCreateRequest;
+import com.ohgiraffers.recipeservice.notification.command.domain.aggregate.Notification;
+import com.ohgiraffers.recipeservice.notification.command.domain.aggregate.NotificationType;
+import com.ohgiraffers.recipeservice.notification.command.domain.repository.NotificationDomainRepository;
+import com.ohgiraffers.recipeservice.notification.command.domain.repository.NotificationTypeDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

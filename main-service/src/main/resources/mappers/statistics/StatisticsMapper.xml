@@ -39,7 +39,7 @@
 
     <resultMap id="CategoryPurchaseMap" type="com.ohgiraffers.mainservice.statistics.query.dto.response.CategoryPurchaseDTO">
         <result property="category" column="ingredient_stock_category"
-                javaType="com.ohgiraffers.mainservice.statistics.query.dto.response.IngredientCategory"/>
+                javaType="com.ohgiraffers.recipeservice.statistics.query.dto.response.IngredientCategory"/>
         <result property="totalCost" column="total_cost"/>
     </resultMap>
     <select id="selectCategoryPurchaseList" resultMap="CategoryPurchaseMap">

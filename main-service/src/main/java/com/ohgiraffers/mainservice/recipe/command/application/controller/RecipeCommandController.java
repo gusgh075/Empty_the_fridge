@@ -1,17 +1,17 @@
-package com.ohgiraffers.mainservice.recipe.command.application.controller;
+package com.ohgiraffers.recipeservice.recipe.command.application.controller;
 
 
 
-import com.ohgiraffers.mainservice.common.dto.ApiResponse;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.request.RecipeCreateRequest;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.request.RecipeRecommendRequest;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.request.RecipeUpdateRequest;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.response.AdoptRecommendedResponse;
-import com.ohgiraffers.mainservice.recipe.command.application.dto.response.RecommendRecipeResponse;
-import com.ohgiraffers.mainservice.recipe.command.application.service.DishCommandService;
-import com.ohgiraffers.mainservice.recipe.command.application.service.RecipeCommandService;
-import com.ohgiraffers.mainservice.recipe.query.dto.response.DishDTO;
-import com.ohgiraffers.mainservice.recipe.query.dto.response.RecipeDTO;
+import com.ohgiraffers.recipeservice.common.dto.ApiResponse;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.request.RecipeCreateRequest;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.request.RecipeRecommendRequest;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.request.RecipeUpdateRequest;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.response.AdoptRecommendedResponse;
+import com.ohgiraffers.recipeservice.recipe.command.application.dto.response.RecommendRecipeResponse;
+import com.ohgiraffers.recipeservice.recipe.command.application.service.DishCommandService;
+import com.ohgiraffers.recipeservice.recipe.command.application.service.RecipeCommandService;
+import com.ohgiraffers.recipeservice.recipe.query.dto.response.DishDTO;
+import com.ohgiraffers.recipeservice.recipe.query.dto.response.RecipeDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,9 +1,9 @@
-package com.ohgiraffers.mainservice.notification.query.service;
+package com.ohgiraffers.recipeservice.notification.query.service;
 
-import com.ohgiraffers.mainservice.jwt.JwtTokenProvider;
-import com.ohgiraffers.mainservice.notification.query.dto.response.NotificationDTO;
-import com.ohgiraffers.mainservice.notification.query.dto.response.NotificationResponse;
-import com.ohgiraffers.mainservice.notification.query.mapper.NotificationMapper;
+import com.ohgiraffers.recipeservice.jwt.JwtTokenProvider;
+import com.ohgiraffers.recipeservice.notification.query.dto.response.NotificationDTO;
+import com.ohgiraffers.recipeservice.notification.query.dto.response.NotificationResponse;
+import com.ohgiraffers.recipeservice.notification.query.mapper.NotificationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

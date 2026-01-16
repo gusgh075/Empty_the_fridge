@@ -1,4 +1,4 @@
-package com.ohgiraffers.mainservice.notification.query.dto.response;
+package com.ohgiraffers.recipeservice.notification.query.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
