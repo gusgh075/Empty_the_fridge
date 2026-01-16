@@ -17,6 +17,17 @@ spring:
     import:
       - classpath:/bootstrap.yml
 
+# SpringDoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
 #mybatis:
 #  configuration:
 #    map-underscore-to-camel-case: true

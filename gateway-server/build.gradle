@@ -30,6 +30,10 @@ ext {
 
 dependencies {
     runtimeOnly 'io.netty:netty-resolver-dns-native-macos:4.1.101.Final:osx-aarch_64'
+
+    // SpringDoc OpenAPI for WebFlux (Swagger UI)
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.5'
+
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
 

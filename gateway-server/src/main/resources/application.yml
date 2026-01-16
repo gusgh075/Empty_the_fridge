@@ -10,7 +10,36 @@ spring:
       server:
         webflux:
           routes:
-             # --- [notification-service 라우팅 규칙] ---
+            # --- [Swagger UI Routes for each service] ---
+            - id: user-service-swagger
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/user-service/v3/api-docs/**
+              filters:
+                - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+            - id: ingredient-stock-service-swagger
+              uri: lb://INGREDIENT-STOCK-SERVICE
+              predicates:
+                - Path=/ingredient-stock-service/v3/api-docs/**
+              filters:
+                - RewritePath=/ingredient-stock-service/(?<segment>.*), /$\{segment}
+
+            - id: recipe-service-swagger
+              uri: lb://RECIPE-SERVICE
+              predicates:
+                - Path=/recipe-service/v3/api-docs/**
+              filters:
+                - RewritePath=/recipe-service/(?<segment>.*), /$\{segment}
+
+            - id: notification-service-swagger
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/notification-service/v3/api-docs/**
+              filters:
+                - RewritePath=/notification-service/(?<segment>.*), /$\{segment}
+
+            # --- [notification-service 라우팅 규칙] ---
             - id: notification-service
               uri: lb://NOTIFICATION-SERVICE
               predicates:
@@ -36,17 +65,29 @@ spring:
               filters:
                 - RewritePath=/api/v1/ingredient-stock-service/(?<segment>.*), /$\{segment}
 
-                # 1. 경로 재작성:
-                #    들어온 요청 '/api/v1/user-service/health' -> 나가는 요청 '/health'
-                #    (?<segment>.*)는 나머지 경로를 변수로 캡처하여 $\{segment}에 넣음
-                - RewritePath=/api/v1/main-service/(?<segment>.*), /$\{segment}
-
             - id: recipe-service
               uri: lb://RECIPE-SERVICE
               predicates:
                 - Path=/api/v1/recipe-service/**
               filters:
                 - RewritePath=/api/v1/recipe-service/(?<segment>.*), /$\{segment}
+
+# SpringDoc OpenAPI Configuration - Aggregates all microservice APIs
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    urls:
+      - name: User Service
+        url: /user-service/v3/api-docs
+      - name: Ingredient Stock Service
+        url: /ingredient-stock-service/v3/api-docs
+      - name: Recipe Service
+        url: /recipe-service/v3/api-docs
+      - name: Notification Service
+        url: /notification-service/v3/api-docs
+  api-docs:
+    enabled: true
 # Eureka Server(전화번호부) 설정
 eureka:
   client:
